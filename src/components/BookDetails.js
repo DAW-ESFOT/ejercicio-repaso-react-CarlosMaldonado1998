@@ -17,7 +17,6 @@ function BookDetails(props) {
             setBook(json);
             return json;
         };
-        console.log("Book", book);
         fetchBooks();
 
     }, []);
