@@ -6,7 +6,6 @@ const { Title, Text } = Typography;
 
 function CardBook(props) {
 
-    const [book, setBooks] = useState(props.book);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
 
@@ -26,36 +25,39 @@ function CardBook(props) {
                     style={{ width: 400 , height: 250, margin: 5}}
                 >
                     <Row >
-                        <Col span={10}>
+                        <Col span={10} align={"left"}>
                             <Image
                                 width={130}
-                                src={book.back_cover}
+                                src={ props.book.back_cover }
                             />
                         </Col>
-                        <Col span={12}>
+                        <Col span={12} align={"left"}>
                             <Space direction="vertical">
-                                <Title level={5}>{book.title}</Title>
-                                <Text>{book.author} - {book.year_edition} </Text>
-                                <Text>Price : ${book.price} </Text>
+                                <Title level={5}>{ props.book.title }</Title>
+                                <Text>{ props.book.author } - { props.book.year_edition } </Text>
+                                <Text>Price : ${ props.book.price } </Text>
                             </Space>
                         </Col>
                     </Row>
-                    <Space>
-                        <Button
-                            type="primary"
-                            onClick={()=>showModal()}>
-                            view Details
-                        </Button>
-                    </Space>
+                    <div align={"right"}>
+                        <Space align="baseline">
+                            <Button
+                                type="primary" shape="round"
+                                onClick={()=>showModal()}>
+                                view Details
+                            </Button>
+                        </Space>
+                    </div>
                 </Card>
             </Col>
+
             <Modal
                 title="Detalles del libro"
                 visible={isModalVisible}
                 onCancel={ handleCancel }
                 width={750}
                 footer={null}>
-                <BookDetails id = {book.id}
+                <BookDetails book = {props.book}
                              onCancel = {handleCancel}/>
             </Modal>
         </>
